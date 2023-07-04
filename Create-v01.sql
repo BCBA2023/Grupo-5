@@ -1,6 +1,7 @@
-create database Grupo5
+--create database Grupo5
+use Grupo5;
 
--- Crear la tabla "Customers"
+
 drop table Categorias;
 drop table Clientes;
 drop table Ordenes;
@@ -8,41 +9,44 @@ drop table OrdenDetalles;
 drop table Productos;
 
 CREATE TABLE Clientes (
-    CustomerID   nchar(5)     NOT NULL,
-    CompanyName  nvarchar(40) NOT NULL,
-    ContactName  nvarchar(30) NULL,
-    Country      nvarchar(15) NULL,
-    Phone        nvarchar(24) NULL,
+    CustomerID   int  NOT NULL,
+    FirstName  nvarchar(200) NULL,
+	LastName  nvarchar(200) NULL,
+	Correo	  nvarchar(200) NULL , 
+    Country     nvarchar(100) NULL,
+    Phone       nvarchar(24) NULL,
     PRIMARY KEY (CustomerID)
 );
 
-CREATE TABLE Ordenes (
-    OrderID       int          NOT NULL,
-    CustomerID    nchar(5)     NULL,
-    EmployeeID    int          NULL,
-    OrderDate     datetime     NULL,
-    ShipCountry   nvarchar(15) NULL,
-    ShipVia       int          NULL,
-    PRIMARY KEY (OrderID),
-    FOREIGN KEY (CustomerID) REFERENCES Clientes(CustomerID)
+create table Store (
+	StoreID int not null,
+	nameStore nvarchar(200) not null unique,
+	adress nvarchar(200) null,
+	PRIMARY KEY (StoreID)
 );
 
-
+CREATE TABLE Ordenes (
+    OrderID       int     NOT NULL,
+    CustomerID    int     NULL,
+    OrderDate     datetime     NULL,
+    StoreID		  int NULL,
+    PRIMARY KEY (OrderID),
+    FOREIGN KEY (CustomerID) REFERENCES Clientes(CustomerID),
+	FOREIGN KEY (StoreID) REFERENCES Store(StoreID)
+);
 
 CREATE TABLE Categorias (
     CategoryID   int          NOT NULL,
-    CategoryName nvarchar(15) NOT NULL,
-    Description  ntext        NULL,
+    CategoryName nvarchar(200) NOT NULL,
+	Detail nvarchar(200) NOT NULL,
     PRIMARY KEY (CategoryID)
 );
-
-select * from Categorias;
 
 CREATE TABLE Productos (
     ProductID   int          NOT NULL,
     ProductName nvarchar(40) NOT NULL,
     CategoryID  int          NULL,
-    UnitPrice   decimal(10,2) NULL,
+    UnitPriceCost   decimal(10,2) NULL,
     UnitsInStock smallint     NULL,
     PRIMARY KEY (ProductID),
 	FOREIGN KEY (CategoryID) REFERENCES Categorias(CategoryID)
@@ -53,8 +57,12 @@ CREATE TABLE OrdenDetalles(
     OrderID       int          NULL,
     ProductID     int          NULL,
     Quantity      int          NULL,
-    UnitPrice     decimal(10,2) NULL,
+    UnitPriceSell decimal(10,2) not NULL,
+	igv			  decimal(10,2) not NULL,
     PRIMARY KEY (OrderDetailID),
     FOREIGN KEY (OrderID) REFERENCES Ordenes(OrderID),
 	FOREIGN KEY (ProductID) REFERENCES Productos(ProductID)
 );
+
+
+------------------
