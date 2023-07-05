@@ -17,7 +17,7 @@ CREATE TABLE Clientes (
     Phone       nvarchar(24) NULL,
     PRIMARY KEY (CustomerID)
 );
-
+	
 create table Store (
 	StoreID int not null,
 	nameStore nvarchar(200) not null unique,
@@ -64,5 +64,18 @@ CREATE TABLE OrdenDetalles(
 	FOREIGN KEY (ProductID) REFERENCES Productos(ProductID)
 );
 
+INSERT INTO Clientes
+values ( 1, 'Jose', 'Martinez', 'jmartinez@gmail.com', 'Perú', '945657809'),
+       ( 2, 'Maria', 'Zavaleta', 'mzavaletag@gmail.com', 'Perú', '946654809'),
+       ( 3, 'Carlos', 'Rosales', 'crosales4@gmail.com', 'Perú', '955627709'),
+       ( 4, 'Sara', 'Gutierrez', 'sgutierrezs@gmail.com', 'Perú', '945355809'),
+       ( 5, 'Raul', 'Gonzales', 'rgonzales@gmail.com', 'Perú', '943454809'),
+       ( 6, 'Jorge', 'Vela', 'jvelao@gmail.com', 'Perú', '955457704'),
+       ( 7, 'Luis', 'Rodriguez', 'lrodriguez@gmail.com', 'Perú', '935556809'),
+       ( 8, 'Carla', 'Fernandez', 'cfernandez@gmail.com', 'Perú', '945480409'),
+       ( 9, 'Manuel', 'Linares', 'mlinares5@gmail.com', 'Perú', '945656703'),
+       ( 10, 'Laura', 'Gomez', 'lgomez@gmail.com', 'Perú', '958656702')
+go
+	
 
 ------------------
